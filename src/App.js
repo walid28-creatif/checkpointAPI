@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Route, Switch } from "react-router-dom";
+
+import "./App.css";
+import NavBar from "./Components/Navbar/Navbar";
+import Home from "./Components/Home/Home";
+import ListUsers from "./Components/ListUsers/ListUsers";
+import User from "./Components/User/User";
+import error from "./Assets/404.jpg";
 
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
+
+  const login = () => setIsAuth(true);
+  const logout = () => setIsAuth(false);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar isAuth={isAuth} login={login} logout={logout} />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/users" component={ListUsers} />
+        <Route path="/users/user/:id" component={User} />
+        <Route
+          path="/*"
+          component={() => (
+            <img src={error} alt="error" style={{ width: "40%" }} />
+          )}
+        />
+      </Switch>
     </div>
   );
 }
