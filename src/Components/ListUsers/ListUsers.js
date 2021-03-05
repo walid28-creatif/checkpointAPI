@@ -18,8 +18,8 @@ const ListUsers = () => {
       .then((response) => response.data)
       .then((resData) => setUsers(resData))
       .then((response) => {
-        setUsers(response.data);
         setIsLoading(false);
+        setUsers(response.data);
       })
       .catch((error) => console.error(error));
   }, []);

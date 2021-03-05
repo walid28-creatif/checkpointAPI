@@ -10,7 +10,7 @@ const User = ({ match, history }) => {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    const url = `https://jsonplaceholder.typicode.com/users/${match.params.id}`;
+    const url = `https://jsonplaceholder.typicode.com/users/ ${match.params.id}`;
     axios.get(url).then((response) => setUser(response.data));
   }, [match.params.id]);
 
